@@ -7,10 +7,10 @@ const Navbar = () => {
   const navigate = useNavigate();
   const { isAuthenticated, logout, user } = useContext(AuthContext);
   const [showMenu, setShowMenu] = useState(false);
-  const [showDropdown, setShowDropdown] = useState(false); // Track dropdown state
+  const [showDropdown, setShowDropdown] = useState(false);
 
   const handleProfileClick = () => {
-    setShowDropdown(!showDropdown); // Toggle dropdown visibility on profile click
+    setShowDropdown(!showDropdown);
   };
 
   return (
@@ -43,6 +43,14 @@ const Navbar = () => {
             </NavLink>
           )
         )}
+        <NavLink
+          to="https://resume-generator-silk.vercel.app/"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="hover:text-blue-500 transition"
+        >
+          <li className="py-1 cursor-pointer">Generate your resume By AI</li>
+        </NavLink>
       </ul>
 
       {/* User Section */}
@@ -50,7 +58,7 @@ const Navbar = () => {
         {isAuthenticated && user ? (
           <div className="relative">
             <div
-              onClick={handleProfileClick} // Open dropdown on profile click
+              onClick={handleProfileClick}
               className="flex items-center gap-2 cursor-pointer"
             >
               <img
@@ -65,7 +73,6 @@ const Navbar = () => {
               />
             </div>
 
-            {/* Profile Dropdown */}
             {showDropdown && (
               <div className="absolute right-0 mt-2 bg-white border rounded shadow-md w-48 text-gray-700 text-sm z-50">
                 <p
@@ -135,6 +142,16 @@ const Navbar = () => {
               </NavLink>
             )
           )}
+          <li>
+            <a
+              href="https://resume-generator-silk.vercel.app/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hover:text-blue-500 block"
+            >
+              Generate your resume By AI
+            </a>
+          </li>
           {!isAuthenticated && (
             <li
               onClick={() => {

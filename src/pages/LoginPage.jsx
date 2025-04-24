@@ -119,6 +119,17 @@ const LoginPage = () => {
             </span>
           </p>
         </div>
+
+        <div className="mt-2 text-center">
+          <p className="mt-2 text-center">
+            <a
+              href="https://xhorizon-frontend.vercel.app/login"
+              className="text-blue-400 cursor-pointer hover:underline"
+            >
+              Admin Login
+            </a>
+          </p>
+        </div>
       </motion.div>
     </div>
   );
