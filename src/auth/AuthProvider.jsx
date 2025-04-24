@@ -10,8 +10,11 @@ const AuthProvider = ({ children }) => {
   const navigate = useNavigate();
   const fetchUser = async () => {
     try {
-      console.log(localStorage.getItem("student_id"));
-      const { data } = await axios.get("/api/users/get-profile");
+      console.log();
+      const { data } = await axios.get("/api/users/get-profile", {
+        id: localStorage.getItem("student_id"),
+      });
+      console.log(data);
 
       if (data.success) {
         setUser(data.student);
