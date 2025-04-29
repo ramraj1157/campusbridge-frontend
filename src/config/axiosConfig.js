@@ -1,6 +1,7 @@
 import axios from "axios";
 
-axios.defaults.baseURL = "https://campusbridge-backend.onrender.com";
+// ✅ Let Vercel proxy handle baseURL
+// ❌ DO NOT set baseURL to the full backend URL
 axios.defaults.withCredentials = true;
 
 export default axios;
