@@ -34,10 +34,17 @@ export const AiAssitant = () => {
         message: input,
       });
 
+      // Assuming the response is plain text; format accordingly if it's different
       const botText =
         response.data?.reply || "Sorry, I couldn't understand that.";
 
-      setMessages((prev) => [...prev, { sender: "bot", text: botText }]);
+      // If the response needs formatting (e.g., replacing newline with <br />)
+      const formattedResponse = botText.replace(/\n/g, "<br />");
+
+      setMessages((prev) => [
+        ...prev,
+        { sender: "bot", text: formattedResponse },
+      ]);
     } catch (error) {
       console.error("Error fetching AI response:", error);
       setMessages((prev) => [
@@ -79,9 +86,10 @@ export const AiAssitant = () => {
                   ? "bg-blue-500 text-white rounded-br-none"
                   : "bg-white text-gray-800 rounded-bl-none"
               }`}
-            >
-              {msg.text}
-            </div>
+              dangerouslySetInnerHTML={{
+                __html: msg.text, // This will safely inject HTML like <br />
+              }}
+            />
           </div>
         ))}
 
