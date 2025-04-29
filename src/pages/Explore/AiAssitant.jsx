@@ -1,6 +1,7 @@
 import React, { useState, useRef, useEffect } from "react";
 import axios from "axios";
 import { Bot, SendHorizontal, Loader } from "lucide-react";
+import ReactMarkdown from "react-markdown"; // Import react-markdown
 
 export const AiAssitant = () => {
   const [input, setInput] = useState("");
@@ -34,17 +35,10 @@ export const AiAssitant = () => {
         message: input,
       });
 
-      // Assuming the response is plain text; format accordingly if it's different
       const botText =
         response.data?.reply || "Sorry, I couldn't understand that.";
 
-      // If the response needs formatting (e.g., replacing newline with <br />)
-      const formattedResponse = botText.replace(/\n/g, "<br />");
-
-      setMessages((prev) => [
-        ...prev,
-        { sender: "bot", text: formattedResponse },
-      ]);
+      setMessages((prev) => [...prev, { sender: "bot", text: botText }]);
     } catch (error) {
       console.error("Error fetching AI response:", error);
       setMessages((prev) => [
@@ -86,10 +80,14 @@ export const AiAssitant = () => {
                   ? "bg-blue-500 text-white rounded-br-none"
                   : "bg-white text-gray-800 rounded-bl-none"
               }`}
-              dangerouslySetInnerHTML={{
-                __html: msg.text, // This will safely inject HTML like <br />
-              }}
-            />
+            >
+              {/* Render markdown for bot messages, plain text for user messages */}
+              {msg.sender === "bot" ? (
+                <ReactMarkdown>{msg.text}</ReactMarkdown>
+              ) : (
+                msg.text
+              )}
+            </div>
           </div>
         ))}
 
